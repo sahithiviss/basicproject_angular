@@ -1,24 +1,32 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <ng-container *ngIf="courses.length > 0;
-                       else elseTemplate">
-  <div class="row">
-    <div class="col-md-4">
-      <table class="table">
-          <tr *ngFor="let x of courses">
-            <td>{{x.name}}</td>
-            <td>{{x.id}}</td>
-            <td>{{x.price}}</td>
-          </tr>    
-      </table>
-    </div>
+<div class="container">
+    <h1>
+      Welcome to {{title}}!
+    </h1>
+    <ng-container *ngIf="courses.length > 0; 
+                        else elseTemplates">
+        <div class="row">
+            <div class="col-md-4" 
+                  *ngFor="let course of courses">
+              <div class="card">
+                <div class="cardheader"
+                  [class.bg-success]="course.offer"
+                  [class.bg-primary]="!course.offer">
+                  {{course.name}}
+                  <a href="#" class="badge badge-warning" *ngIf="course.offer">Offer</a>
+                </div>
+                </div>
+                <div class="card-body" [style.backgroundColor]="course.price>5000? 'tomato': 'goldenrod'">
+                  <p class="card-text">Name: {{course.name}}</p>
+                  
+                  <img src="./favicon.ico" alt="">
+                  <p class="card-text">Price: {{course.price}}</p>
+                  <p class="card-text">Duration: {{course.duration}}</p>
+                </div>
+              </div>
+            </div>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <h2>No courses to display</h2>
+      </ng-template>
   </div>
-</ng-container>
-<ng-template #elseTemplate>
-  <h2>No courses to display</h2>
-</ng-template>
-</div>
-
